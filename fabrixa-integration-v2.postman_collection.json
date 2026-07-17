@@ -1,0 +1,233 @@
+{
+  "info": {
+    "name": "Fabrixa Integration API (v2)",
+    "_postman_id": "fabrixa-integration-v2",
+    "description": "Worked requests for the Fabrixa Integration API (v2).\n\nBase URL: https://api.fabrixa.com/v2/integration\nAuth: two headers on every request \u2014 Authorization: Bearer {{access_token}} and X-Application-Key: {{application_key}}. Generate both by creating a sales channel in your Fabrixa dashboard.\nRate limit: 30 requests per application per minute.\n\nSet your keys in the collection Variables tab. Webhooks (order.created / order.updated) are delivered to YOUR endpoint and verified with an HMAC-SHA256 signature \u2014 see the integration guide.\n\nDocs: https://api.fabrixa.com/docs/integration",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://api.fabrixa.com/v2/integration",
+      "type": "string"
+    },
+    {
+      "key": "studio_base",
+      "value": "https://api.fabrixa.com/v2/studio",
+      "type": "string"
+    },
+    {
+      "key": "access_token",
+      "value": "APPLICATION_ACCESS_TOKEN",
+      "type": "string"
+    },
+    {
+      "key": "application_key",
+      "value": "APPLICATION_KEY",
+      "type": "string"
+    },
+    {
+      "key": "order_id",
+      "value": "1499",
+      "type": "string"
+    },
+    {
+      "key": "cart_item_key",
+      "value": "0cb76770-de2d-4524-aa48-47b6e5f0d8a5",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Ping \u2014 verify credentials",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              },
+              {
+                "key": "X-Application-Key",
+                "value": "{{application_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ping",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ping"
+              ]
+            },
+            "description": "Confirms the Application Access Token and Application Key are valid. 200 OK = valid; 401 = missing/revoked; 403 = valid but no access."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "List products",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              },
+              {
+                "key": "X-Application-Key",
+                "value": "{{application_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/products?page=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "products"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "Lists product variants (SKU + variant_id) in the standard links / meta / data envelope. Paginate via links.next_page. Full field schemas: https://api.fabrixa.com/v2/integration/docs"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "Create an order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              },
+              {
+                "key": "X-Application-Key",
+                "value": "{{application_key}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"number\": \"NL2026063001\",\n  \"purchased_at\": \"2026-06-30 12:00:00\",\n  \"rows\": [\n    {\n      \"sku\": \"COF099191\",\n      \"quantity\": 1,\n      \"sources\": [\n        {\n          \"type\": \"file\",\n          \"url\": \"https://example.com/artwork.pdf\"\n        }\n      ]\n    }\n  ],\n  \"customer\": {\n    \"first_name\": \"Maria\",\n    \"last_name\": \"Jansen\",\n    \"email\": \"maria@example.com\",\n    \"phone\": \"0612345678\"\n  },\n  \"shipping_address\": {\n    \"address\": \"Pierre Cuypershof\",\n    \"address2\": \"17\",\n    \"city\": \"Amsterdam\",\n    \"country_code\": \"NL\",\n    \"country\": \"Netherlands\",\n    \"postal_code\": \"1012 AB\",\n    \"first_name\": \"Maria\",\n    \"last_name\": \"Jansen\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/orders",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "orders"
+              ]
+            },
+            "description": "Creates an order. Each row needs sku + quantity, plus either sources (a print-ready PDF URL) OR a cart_item_key from a saved Fabrixa Studio customisation. Set your own number, or omit it and one is generated."
+          }
+        },
+        {
+          "name": "Track fulfilment",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              },
+              {
+                "key": "X-Application-Key",
+                "value": "{{application_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/orders/{{order_id}}/fulfillments",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "orders",
+                "{{order_id}}",
+                "fulfillments"
+              ]
+            },
+            "description": "Per-item fulfilment records with production_steps (status: pending / in progress / done / rejected). Empty data = the order hasn't entered production yet."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Studio",
+      "item": [
+        {
+          "name": "Customisation preview image",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "image/*"
+              }
+            ],
+            "url": {
+              "raw": "{{studio_base}}/customizations/{{cart_item_key}}/preview?Application-Key={{application_key}}",
+              "host": [
+                "{{studio_base}}"
+              ],
+              "path": [
+                "customizations",
+                "{{cart_item_key}}",
+                "preview"
+              ],
+              "query": [
+                {
+                  "key": "Application-Key",
+                  "value": "{{application_key}}"
+                }
+              ]
+            },
+            "description": "Returns a rendered image of a saved Studio customisation. NOTE: different base (/v2/studio, not /v2/integration) and the Application Key goes in the Application-Key query parameter, not the headers."
+          }
+        }
+      ]
+    }
+  ]
+}
