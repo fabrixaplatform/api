@@ -1,0 +1,1878 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Fabrixa Integration API",
+        "description": "Integration API References",
+        "contact": {
+            "email": "serhii.kamolov@probegin.com"
+        },
+        "license": {
+            "name": "FABRIXA",
+            "url": "https://fabrixa.com"
+        },
+        "version": "2.0"
+    },
+    "servers": [
+        {
+            "url": "https://api.fabrixa.com/v2/integration",
+            "description": "API Server"
+        }
+    ],
+    "paths": {
+        "/catalog/categories": {
+            "get": {
+                "tags": [
+                    "Catalog"
+                ],
+                "summary": "Get the public catalog categories",
+                "operationId": "1402391c8f3b7cd9277f36bc34e988c4",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "links": {
+                                        "self": "https://api.fabrixa.com/v2/integration/catalog/categories"
+                                    },
+                                    "data": [
+                                        {
+                                            "id": 8,
+                                            "name": "Bedroom",
+                                            "description": "Bedroom products",
+                                            "sort_number": 1,
+                                            "slug": "bedroom",
+                                            "products_count": 12,
+                                            "sub_categories": [
+                                                {
+                                                    "id": 19,
+                                                    "name": "Duvet covers",
+                                                    "description": "Personalized duvet covers",
+                                                    "sort_number": 1,
+                                                    "slug": "duvet-covers",
+                                                    "products_count": 7,
+                                                    "images": [],
+                                                    "sub_categories": []
+                                                }
+                                            ],
+                                            "parent_category": null,
+                                            "images": [
+                                                {
+                                                    "id": 781,
+                                                    "url": "https://storage.googleapis.com/example/catalog/bedroom.jpg",
+                                                    "is_main": true,
+                                                    "created_at": "2024-08-16T09:32:07.000000Z",
+                                                    "screen_type_size": "large",
+                                                    "sort_number": 1
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": []
+            }
+        },
+        "/catalog/products": {
+            "get": {
+                "tags": [
+                    "Catalog"
+                ],
+                "summary": "Get the public product catalog",
+                "description": "Returns active catalog products that can be used by integration clients. Product variants are included with SKU, price, dimensions, and option values.",
+                "operationId": "c3c385712fbc9fe96238645c59b7d714",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "example": 10,
+                            "maximum": 100
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "example": "Duvet"
+                        }
+                    },
+                    {
+                        "name": "parent_category_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "example": 8
+                        }
+                    },
+                    {
+                        "name": "group_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "example": 4
+                        }
+                    },
+                    {
+                        "name": "sort_by",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "example": "name",
+                            "enum": [
+                                "name",
+                                "created",
+                                "updated",
+                                "status",
+                                "type",
+                                "price",
+                                "popular",
+                                "sold",
+                                "latest_sync_at"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "sort_order",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "example": "asc",
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "links": {
+                                        "self": "https://api.fabrixa.com/v2/integration/catalog/products"
+                                    },
+                                    "data": [
+                                        {
+                                            "id": 1305,
+                                            "name": "Duvet Cover",
+                                            "subtitle": "Duvet Cover with a pillow",
+                                            "description": "<p>Soft personalized duvet cover.</p>",
+                                            "slug": "duvet-cover",
+                                            "code": "DUVET-001",
+                                            "HS_code": "63023100",
+                                            "created_at": "2024-08-16T09:32:07.000000Z",
+                                            "updated_at": "2024-08-16T09:38:50.000000Z",
+                                            "variants_min_selling_price": "29.95",
+                                            "variants_max_selling_price": "49.95",
+                                            "type": {
+                                                "id": 5,
+                                                "name": "Duvet cover"
+                                            },
+                                            "status": {
+                                                "id": 2,
+                                                "name": "Active"
+                                            },
+                                            "categories": [
+                                                {
+                                                    "id": 8,
+                                                    "name": "Bedroom",
+                                                    "description": "Bedroom products",
+                                                    "parent_category": null
+                                                }
+                                            ],
+                                            "images": [
+                                                {
+                                                    "id": 5566,
+                                                    "is_main": true,
+                                                    "image_size": "1200x1200",
+                                                    "url": "https://storage.googleapis.com/example/catalog/duvet-cover.jpg",
+                                                    "screen_type_size": "large",
+                                                    "sort_number": 1
+                                                }
+                                            ],
+                                            "variants": [
+                                                {
+                                                    "id": 2705,
+                                                    "name": "Duvet Cover 140x200",
+                                                    "subtitle": "Single size",
+                                                    "description": "140x200 duvet cover",
+                                                    "SKU": "DUVET-001-140200",
+                                                    "selling_price": "29.95",
+                                                    "width": "140.00",
+                                                    "height": "200.00",
+                                                    "length": "2.00",
+                                                    "weight": "1.20",
+                                                    "created_at": "2024-08-16T09:32:07.000000Z",
+                                                    "updated_at": "2024-08-16T09:38:50.000000Z",
+                                                    "options": [
+                                                        {
+                                                            "id": 2,
+                                                            "name": "Size",
+                                                            "values": [
+                                                                {
+                                                                    "id": 18,
+                                                                    "value": "140x200"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": []
+            }
+        },
+        "/orders": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Retrieve a list of orders",
+                "operationId": "9f5dcdc03f4aa6af54114092ba41e306",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Search by the order number.",
+                        "required": false,
+                        "example": ""
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Define a current page.",
+                        "required": false,
+                        "example": "1"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Set the result limit.",
+                        "required": false,
+                        "example": "10"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrderCollectionResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "ApplicationAccessToken": []
+                    },
+                    {
+                        "ApplicationKey": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Create an order",
+                "operationId": "1f59b67b88bc21d8610e9781d5feeadd",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OrderCreateRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrderResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "errors": {
+                                            "example": {
+                                                "number": [
+                                                    "The number has already been taken."
+                                                ],
+                                                "shipping_address.address": [
+                                                    "The shipping address.address field is required."
+                                                ],
+                                                "rows.0.quantity": [
+                                                    "The quantity must be at least 1."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "ApplicationAccessToken": []
+                    },
+                    {
+                        "ApplicationKey": []
+                    }
+                ]
+            }
+        },
+        "/orders/{order_id}": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Retrieve a specific order by order id or order number",
+                "operationId": "9ebd26fd1330a225a5069b6085190d3a",
+                "parameters": [
+                    {
+                        "name": "order_id",
+                        "in": "path",
+                        "description": "Order id or order number",
+                        "required": true,
+                        "example": 20338
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrderResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "ApplicationAccessToken": []
+                    },
+                    {
+                        "ApplicationKey": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Update an order",
+                "operationId": "29878d8c1f0f1e28981f9da915e7b9e1",
+                "parameters": [
+                    {
+                        "name": "order_id",
+                        "in": "path",
+                        "description": "Order ID",
+                        "required": true,
+                        "example": 20338
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OrderUpdateRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrderResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "errors": {
+                                            "example": {
+                                                "number": [
+                                                    "The number has already been taken."
+                                                ],
+                                                "rows.0.quantity": [
+                                                    "The rows quantity must be at least 1."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "ApplicationAccessToken": []
+                    },
+                    {
+                        "ApplicationKey": []
+                    }
+                ]
+            }
+        },
+        "/orders/{order_id}/fulfillments": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Retrieve a list of order's fulfillments",
+                "operationId": "279210a803827d3dd0b5e3b0633df6ef",
+                "parameters": [
+                    {
+                        "name": "order_id",
+                        "in": "path",
+                        "description": "Order ID",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrderFulfillmentResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "ApplicationAccessToken": []
+                    },
+                    {
+                        "ApplicationKey": []
+                    }
+                ]
+            }
+        },
+        "/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Retrieve a list of products",
+                "operationId": "0e8eb9b546463a9618ccb287513568ea",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Search by the product name.",
+                        "required": false,
+                        "example": ""
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Define a current page.",
+                        "required": false,
+                        "example": "1"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Set the result limit.",
+                        "required": false,
+                        "example": "10"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProductCollectionResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "ApplicationAccessToken": []
+                    },
+                    {
+                        "ApplicationKey": []
+                    }
+                ]
+            }
+        },
+        "/products/{product_id}": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Retrieve a specific product",
+                "operationId": "8b23afc8520f0d80f8c900a157fbd18c",
+                "parameters": [
+                    {
+                        "name": "product_id",
+                        "in": "path",
+                        "description": "Product ID",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProductResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "ApplicationAccessToken": []
+                    },
+                    {
+                        "ApplicationKey": []
+                    }
+                ]
+            }
+        },
+        "/variants/{variant_id}": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Retrieve a specific product variant.",
+                "operationId": "fcd4411d5b178812e38e37ae593a4e92",
+                "parameters": [
+                    {
+                        "name": "variant_id",
+                        "in": "path",
+                        "description": "Product Variant ID",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/VariantResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "ApplicationAccessToken": []
+                    },
+                    {
+                        "ApplicationKey": []
+                    }
+                ]
+            }
+        },
+        "/ping": {
+            "get": {
+                "tags": [
+                    "Default"
+                ],
+                "summary": "Test API connection.",
+                "operationId": "2a5dd4a0f453ee2d124769ec7ab7a311",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "example": [
+                                                "PONG"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "ApplicationAccessToken": []
+                    },
+                    {
+                        "ApplicationKey": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CatalogCategoryCollectionRequest": {
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "example": 10,
+                        "maximum": 100
+                    },
+                    "search": {
+                        "type": "string",
+                        "example": "Bedroom"
+                    },
+                    "sort_by": {
+                        "type": "string",
+                        "example": "category_name",
+                        "enum": [
+                            "category_name",
+                            "category_created"
+                        ]
+                    },
+                    "sort_order": {
+                        "type": "string",
+                        "example": "asc",
+                        "enum": [
+                            "asc",
+                            "desc"
+                        ]
+                    },
+                    "with_products_only": {
+                        "type": "boolean",
+                        "example": true
+                    }
+                },
+                "type": "object"
+            },
+            "CatalogProductCollectionRequest": {
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "example": 10,
+                        "maximum": 100
+                    },
+                    "search": {
+                        "type": "string",
+                        "example": "Duvet"
+                    },
+                    "parent_category_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "category_id": {
+                        "type": "integer",
+                        "example": 8
+                    },
+                    "group_id": {
+                        "type": "integer",
+                        "example": 4
+                    },
+                    "product_status_id": {
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "application_id": {
+                        "type": "integer",
+                        "example": 12
+                    },
+                    "shop_id": {
+                        "type": "integer",
+                        "example": 45
+                    },
+                    "show_without_folders": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "show_with_folders": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "has_integration_product": {
+                        "type": "boolean",
+                        "example": false,
+                        "nullable": true
+                    },
+                    "is_catalog_product": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "sort_by": {
+                        "type": "string",
+                        "example": "name",
+                        "enum": [
+                            "name",
+                            "created",
+                            "updated",
+                            "status",
+                            "type",
+                            "price",
+                            "popular",
+                            "sold",
+                            "latest_sync_at"
+                        ]
+                    },
+                    "sort_order": {
+                        "type": "string",
+                        "example": "asc",
+                        "enum": [
+                            "asc",
+                            "desc"
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "OrderCreateRequest": {
+                "title": "OrderCreateRequest",
+                "description": "Request to create an order.",
+                "required": [
+                    "rows",
+                    "customer"
+                ],
+                "properties": {
+                    "number": {
+                        "type": "string",
+                        "example": "NL2024010201"
+                    },
+                    "comments": {
+                        "type": "string",
+                        "example": "Customer agrees with a low resolution file."
+                    },
+                    "purchased_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-06-26 21:12:22"
+                    },
+                    "client_ip": {
+                        "type": "string",
+                        "example": "127.0.0.1"
+                    },
+                    "client_user_agent": {
+                        "type": "string",
+                        "example": "Mozilla"
+                    },
+                    "rows": {
+                        "type": "array",
+                        "items": {
+                            "description": "Either variant_id or sku must be provided.",
+                            "required": [
+                                "quantity"
+                            ],
+                            "properties": {
+                                "variant_id": {
+                                    "description": "Required if sku is not provided.",
+                                    "type": "integer",
+                                    "example": 2705
+                                },
+                                "sku": {
+                                    "description": "Required if variant_id is not provided.",
+                                    "type": "string",
+                                    "example": "TSHIRT-BLACK-XL"
+                                },
+                                "quantity": {
+                                    "type": "integer",
+                                    "example": 1,
+                                    "minimum": 1
+                                },
+                                "client_barcode": {
+                                    "type": "string",
+                                    "example": "1234567890"
+                                },
+                                "sources": {
+                                    "type": "array",
+                                    "items": {
+                                        "required": [
+                                            "type",
+                                            "url"
+                                        ],
+                                        "properties": {
+                                            "type": {
+                                                "type": "string",
+                                                "example": "print"
+                                            },
+                                            "url": {
+                                                "type": "string",
+                                                "format": "uri",
+                                                "example": "https://samples-files.com/samples/Images/480-360-sample.pdf"
+                                            },
+                                            "properties": {
+                                                "properties": {
+                                                    "fill_style": {
+                                                        "type": "string",
+                                                        "example": "contain",
+                                                        "enum": [
+                                                            "pattern",
+                                                            "contain"
+                                                        ]
+                                                    },
+                                                    "width": {
+                                                        "type": "integer",
+                                                        "example": 100
+                                                    },
+                                                    "height": {
+                                                        "type": "integer",
+                                                        "example": 100
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "example": [
+                            {
+                                "sku": "TSHIRT-BLACK-XL",
+                                "quantity": 1,
+                                "client_barcode": "1234567890",
+                                "sources": [
+                                    {
+                                        "type": "duvet",
+                                        "url": "https://samples-files.com/samples/sample.pdf",
+                                        "properties": {
+                                            "fill_style": "contain"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "customer": {
+                        "required": [
+                            "email"
+                        ],
+                        "properties": {
+                            "first_name": {
+                                "type": "string",
+                                "example": "John"
+                            },
+                            "last_name": {
+                                "type": "string",
+                                "example": "Doe"
+                            },
+                            "email": {
+                                "type": "string",
+                                "format": "email",
+                                "example": "john@example.com"
+                            },
+                            "phone": {
+                                "type": "string",
+                                "example": "0647185332"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "shipping_address": {
+                        "properties": {
+                            "address": {
+                                "type": "string",
+                                "example": "Pierre cuypershof"
+                            },
+                            "address2": {
+                                "type": "string",
+                                "example": "17"
+                            },
+                            "address3": {
+                                "type": "string"
+                            },
+                            "city": {
+                                "type": "string",
+                                "example": "Amsterdam"
+                            },
+                            "country_code": {
+                                "type": "string",
+                                "example": "NL"
+                            },
+                            "country": {
+                                "type": "string",
+                                "example": "Netherlands"
+                            },
+                            "postal_code": {
+                                "type": "string",
+                                "example": "1012 AB"
+                            },
+                            "state": {
+                                "type": "string",
+                                "example": "North Holland"
+                            },
+                            "first_name": {
+                                "type": "string",
+                                "example": "John"
+                            },
+                            "last_name": {
+                                "type": "string",
+                                "example": "Doe"
+                            },
+                            "phone": {
+                                "type": "string",
+                                "example": "0647185332"
+                            },
+                            "company": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "OrderUpdateRequest": {
+                "title": "OrderUpdateRequest",
+                "description": "Request to update an order.",
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/OrderCreateRequest"
+                    },
+                    {
+                        "properties": {
+                            "number": {
+                                "type": "string",
+                                "example": "NL2024010201"
+                            },
+                            "comments": {
+                                "type": "string",
+                                "example": "Customer agrees with a low resulition file."
+                            },
+                            "purchased_at": {
+                                "type": "string",
+                                "example": "2024-06-26 21:12:22"
+                            },
+                            "client_ip": {
+                                "type": "string",
+                                "example": "127.0.0.1"
+                            },
+                            "client_user_agent": {
+                                "type": "string",
+                                "example": "Mozilla"
+                            },
+                            "rows": {
+                                "type": "object",
+                                "example": [
+                                    {
+                                        "variant_id": 2705,
+                                        "quantity": 1,
+                                        "client_barcode": "1234567890",
+                                        "uploads": [
+                                            {
+                                                "type": "duvet",
+                                                "url": "https://samples-files.com/samples/Images/tiff/480-360-sample.tiff"
+                                            },
+                                            {
+                                                "type": "pillow",
+                                                "url": "https://samples-files.com/samples/Images/tiff/480-360-sample.tiff"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "customer": {
+                                "type": "object",
+                                "example": {
+                                    "first_name": "John",
+                                    "last_name": "Doe",
+                                    "email": "3VJtP@example.com",
+                                    "phone": "0647185332"
+                                }
+                            },
+                            "shipping_address": {
+                                "type": "object",
+                                "example": {
+                                    "address": "Pierre cuypershof",
+                                    "address2": "17",
+                                    "address3": "",
+                                    "city": "Amsterdam",
+                                    "country_code": "NL",
+                                    "country": "Netherlands",
+                                    "postal_code": "1012 AB",
+                                    "state": "North Holland",
+                                    "first_name": "John",
+                                    "last_name": "Doe",
+                                    "phone": "0647185332",
+                                    "company": ""
+                                }
+                            }
+                        },
+                        "type": "object"
+                    }
+                ]
+            },
+            "OrderCollectionResponse": {
+                "properties": {
+                    "links": {
+                        "example": {
+                            "self": "https://api.fabrixa.com/v2/integration/orders",
+                            "first_page": "https://api.fabrixa.com/v2/integration/orders?page=1",
+                            "last_page": "https://api.fabrixa.com/v2/integration/orders?page=2",
+                            "next_page": "https://api.fabrixa.com/v2/integration/orders?page=2",
+                            "prev_page": null
+                        }
+                    },
+                    "meta": {
+                        "example": {
+                            "total": 2,
+                            "current_page": 1,
+                            "per_page": 10
+                        }
+                    },
+                    "data": {
+                        "example": [
+                            {
+                                "id": 6615,
+                                "number": "NL1124080031",
+                                "comments": "Customer agrees with a low resolution file.",
+                                "is_archived": false,
+                                "purchased_at": "2024-06-26T21:12:22.000000Z",
+                                "fulfillment_status": "unfulfilled",
+                                "rows": [
+                                    {
+                                        "id": 4160,
+                                        "quantity": 2,
+                                        "client_barcode": null,
+                                        "variant": {
+                                            "id": 32323,
+                                            "name": "Duvet Cover",
+                                            "subtitle": "140x200",
+                                            "SKU": "COT864311",
+                                            "product": {
+                                                "id": 1305,
+                                                "name": "Duvet Cover",
+                                                "subtitle": "Duvet Cover with a pillow"
+                                            }
+                                        },
+                                        "sources": [
+                                            {
+                                                "type": "duvet",
+                                                "url": "https://storage.googleapis.com/dev-tixxio-api/public/200x140-jpg.jpg",
+                                                "properties": {
+                                                    "fill_style": "contain"
+                                                }
+                                            },
+                                            {
+                                                "type": "pillow",
+                                                "url": "https://api.fabrixa.com/api/v2/storage/72f9601a-381a-11ed-a261-0242ac120002/product-designer/artifacts/112462522265b125d98131d1706108377.png",
+                                                "properties": {
+                                                    "fill_style": "contain"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "customer": {
+                                    "email": "3VJtP@example.com",
+                                    "first_name": "John",
+                                    "last_name": "Doe",
+                                    "phone": "0647185332"
+                                },
+                                "shipping_address": {
+                                    "address": "Pierre cuypershof",
+                                    "address2": "17",
+                                    "address3": null,
+                                    "city": "Amsterdam",
+                                    "country": "Netherlands",
+                                    "country_code": "NL",
+                                    "company": null,
+                                    "first_name": "John",
+                                    "last_name": "Doe",
+                                    "phone": "0647185332",
+                                    "state": "North Holland",
+                                    "postal_code": "1012 AB"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "OrderFulfillmentResponse": {
+                "properties": {
+                    "meta": {
+                        "example": []
+                    },
+                    "data": {
+                        "example": [
+                            {
+                                "id": 10565,
+                                "barcode": "100001763601",
+                                "status": "unfulfilled",
+                                "variant_id": 1258,
+                                "product_id": 413,
+                                "quantity": 1,
+                                "created_at": "2024-06-20T08:59:46.000000Z",
+                                "updated_at": "2024-06-20T08:59:46.000000Z",
+                                "variant": {
+                                    "id": 1258,
+                                    "name": "Jungledieren Patroon",
+                                    "subtitle": "120 x 150 cm",
+                                    "SKU": "GO111258"
+                                },
+                                "product": {
+                                    "id": 413,
+                                    "name": "Jungledieren Patroon",
+                                    "subtitle": "Luxe Fleece Deken"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "OrderResponse": {
+                "properties": {
+                    "meta": {
+                        "example": []
+                    },
+                    "data": {
+                        "example": {
+                            "id": 6615,
+                            "number": "NL1124080031",
+                            "comments": "Customer agrees with a low resolution file.",
+                            "is_archived": false,
+                            "purchased_at": "2024-06-26T21:12:22.000000Z",
+                            "fulfillment_status": "unfulfilled",
+                            "rows": [
+                                {
+                                    "id": 4160,
+                                    "quantity": 2,
+                                    "client_barcode": null,
+                                    "variant": {
+                                        "id": 32323,
+                                        "name": "Duvet Cover",
+                                        "subtitle": "140x200",
+                                        "SKU": "COT864311",
+                                        "product": {
+                                            "id": 1305,
+                                            "name": "Duvet Cover",
+                                            "subtitle": "Duvet Cover with a pillow"
+                                        }
+                                    },
+                                    "sources": [
+                                        {
+                                            "type": "duvet",
+                                            "url": "https://storage.googleapis.com/dev-tixxio-api/public/200x140-jpg.jpg",
+                                            "properties": {
+                                                "fill_style": "contain"
+                                            }
+                                        },
+                                        {
+                                            "type": "pillow",
+                                            "url": "https://api.fabrixa.com/api/v2/storage/72f9601a-381a-11ed-a261-0242ac120002/product-designer/artifacts/112462522265b125d98131d1706108377.png",
+                                            "properties": {
+                                                "fill_style": "contain"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ],
+                            "customer": {
+                                "email": "3VJtP@example.com",
+                                "first_name": "John",
+                                "last_name": "Doe",
+                                "phone": "0647185332"
+                            },
+                            "shipping_address": {
+                                "address": "Pierre cuypershof",
+                                "address2": "17",
+                                "address3": null,
+                                "city": "Amsterdam",
+                                "country": "Netherlands",
+                                "country_code": "NL",
+                                "company": null,
+                                "first_name": "John",
+                                "last_name": "Doe",
+                                "phone": "0647185332",
+                                "state": "North Holland",
+                                "postal_code": "1012 AB"
+                            }
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "ProductCollectionResponse": {
+                "properties": {
+                    "links": {
+                        "example": {
+                            "self": "https://api.fabrixa.com/v2/integration/products",
+                            "first_page": "https://api.fabrixa.com/v2/integration/products?page=1",
+                            "last_page": "https://api.fabrixa.com/v2/integration/products?page=2",
+                            "next_page": "https://api.fabrixa.com/v2/integration/products?page=2",
+                            "prev_page": null
+                        }
+                    },
+                    "meta": {
+                        "example": {
+                            "total": 2,
+                            "current_page": 1,
+                            "per_page": 10
+                        }
+                    },
+                    "data": {
+                        "example": [
+                            {
+                                "id": 1305,
+                                "name": "Duvet Cover",
+                                "subtitle": "Duvet Cover with a pillow",
+                                "description": "<p>Duvet Cover with a pillow</p>",
+                                "slug": "duvet-cover",
+                                "width": "50.00",
+                                "height": "50.00",
+                                "length": "20.00",
+                                "weight": "100.00",
+                                "created_at": "2024-08-16T09:32:07.000000Z",
+                                "updated_at": "2024-08-16T09:38:50.000000Z",
+                                "type": {
+                                    "id": 5,
+                                    "name": "Duvet cover",
+                                    "description": "Duvet cover with pillow"
+                                },
+                                "available_options": [
+                                    {
+                                        "id": 151,
+                                        "name": "Duvet Size",
+                                        "values": [
+                                            {
+                                                "id": 471,
+                                                "value": "140x200"
+                                            },
+                                            {
+                                                "id": 472,
+                                                "value": "140x220"
+                                            },
+                                            {
+                                                "id": 473,
+                                                "value": "200x200"
+                                            },
+                                            {
+                                                "id": 474,
+                                                "value": "200x220"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "categories": [],
+                                "collections": [],
+                                "images": [
+                                    {
+                                        "id": 5566,
+                                        "is_main": false,
+                                        "image_size": null,
+                                        "url": "https://storage.googleapis.com/dev-tixxio-api/storage/8ac7cdb8-e198-11ec-a195-0242ac120005/products/142419867266bf1d9f8d8911723800991.jpg",
+                                        "screen_type_size": "large",
+                                        "sort_number": 0
+                                    }
+                                ],
+                                "tags": [],
+                                "variants": [
+                                    {
+                                        "id": 32323,
+                                        "name": "Duvet Cover",
+                                        "subtitle": "140x200",
+                                        "description": null,
+                                        "SKU": "COT864311",
+                                        "created_at": "2024-08-06T11:23:44.000000Z",
+                                        "updated_at": "2024-08-16T09:36:37.000000Z",
+                                        "options": [
+                                            {
+                                                "id": 151,
+                                                "name": "Duvet Size",
+                                                "values": [
+                                                    {
+                                                        "id": 471,
+                                                        "value": "140x200"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "images": [],
+                                        "available_source_types": [
+                                            "duvet",
+                                            "pillow",
+                                            "pillow-back"
+                                        ],
+                                        "required_source_types": [
+                                            "duvet",
+                                            "pillow"
+                                        ]
+                                    },
+                                    {
+                                        "id": 32324,
+                                        "name": "Duvet Cover",
+                                        "subtitle": "140x220",
+                                        "description": null,
+                                        "SKU": "COT864312",
+                                        "created_at": "2024-08-06T11:23:44.000000Z",
+                                        "updated_at": "2024-08-16T09:36:37.000000Z",
+                                        "options": [
+                                            {
+                                                "id": 151,
+                                                "name": "Duvet Size",
+                                                "values": [
+                                                    {
+                                                        "id": 472,
+                                                        "value": "140x220"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "images": [],
+                                        "available_source_types": [
+                                            "duvet",
+                                            "pillow",
+                                            "pillow-back"
+                                        ],
+                                        "required_source_types": [
+                                            "duvet",
+                                            "pillow"
+                                        ]
+                                    },
+                                    {
+                                        "id": 32325,
+                                        "name": "Duvet Cover",
+                                        "subtitle": "200x200",
+                                        "description": null,
+                                        "SKU": "COT864313",
+                                        "created_at": "2024-08-06T11:23:44.000000Z",
+                                        "updated_at": "2024-08-16T09:37:11.000000Z",
+                                        "options": [
+                                            {
+                                                "id": 151,
+                                                "name": "Duvet Size",
+                                                "values": [
+                                                    {
+                                                        "id": 473,
+                                                        "value": "200x200"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "images": [],
+                                        "available_source_types": [
+                                            "duvet",
+                                            "pillow",
+                                            "pillow-back"
+                                        ]
+                                    },
+                                    {
+                                        "id": 32326,
+                                        "name": "Duvet Cover",
+                                        "subtitle": "200x220",
+                                        "description": null,
+                                        "SKU": "COT864314",
+                                        "created_at": "2024-08-06T11:23:44.000000Z",
+                                        "updated_at": "2024-08-16T09:37:11.000000Z",
+                                        "options": [
+                                            {
+                                                "id": 151,
+                                                "name": "Duvet Size",
+                                                "values": [
+                                                    {
+                                                        "id": 474,
+                                                        "value": "200x220"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "images": [],
+                                        "available_source_types": [
+                                            "duvet",
+                                            "pillow",
+                                            "pillow-back"
+                                        ],
+                                        "required_source_types": [
+                                            "duvet",
+                                            "pillow"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "ProductResponse": {
+                "properties": {
+                    "data": {
+                        "example": {
+                            "id": 1305,
+                            "name": "Duvet Cover",
+                            "subtitle": "Duvet Cover with a pillow",
+                            "description": "<p>Duvet Cover with a pillow</p>",
+                            "slug": "duvet-cover",
+                            "width": "50.00",
+                            "height": "50.00",
+                            "length": "20.00",
+                            "weight": "100.00",
+                            "created_at": "2024-08-16T09:32:07.000000Z",
+                            "updated_at": "2024-08-16T09:38:50.000000Z",
+                            "type": {
+                                "id": 5,
+                                "name": "Duvet cover",
+                                "description": "Duvet cover with pillow"
+                            },
+                            "available_options": [
+                                {
+                                    "id": 151,
+                                    "name": "Duvet Size",
+                                    "values": [
+                                        {
+                                            "id": 471,
+                                            "value": "140x200"
+                                        },
+                                        {
+                                            "id": 472,
+                                            "value": "140x220"
+                                        },
+                                        {
+                                            "id": 473,
+                                            "value": "200x200"
+                                        },
+                                        {
+                                            "id": 474,
+                                            "value": "200x220"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "categories": [],
+                            "collections": [],
+                            "images": [
+                                {
+                                    "id": 5566,
+                                    "is_main": false,
+                                    "image_size": null,
+                                    "url": "https://storage.googleapis.com/dev-tixxio-api/storage/8ac7cdb8-e198-11ec-a195-0242ac120005/products/142419867266bf1d9f8d8911723800991.jpg",
+                                    "screen_type_size": "large",
+                                    "sort_number": 0
+                                }
+                            ],
+                            "tags": [],
+                            "variants": [
+                                {
+                                    "id": 32323,
+                                    "name": "Duvet Cover",
+                                    "subtitle": "140x200",
+                                    "description": null,
+                                    "SKU": "COT864311",
+                                    "created_at": "2024-08-06T11:23:44.000000Z",
+                                    "updated_at": "2024-08-16T09:36:37.000000Z",
+                                    "options": [
+                                        {
+                                            "id": 151,
+                                            "name": "Duvet Size",
+                                            "values": [
+                                                {
+                                                    "id": 471,
+                                                    "value": "140x200"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "images": [],
+                                    "available_source_types": [
+                                        "duvet",
+                                        "pillow",
+                                        "pillow-back"
+                                    ],
+                                    "required_source_types": [
+                                        "duvet",
+                                        "pillow"
+                                    ]
+                                },
+                                {
+                                    "id": 32324,
+                                    "name": "Duvet Cover",
+                                    "subtitle": "140x220",
+                                    "description": null,
+                                    "SKU": "COT864312",
+                                    "created_at": "2024-08-06T11:23:44.000000Z",
+                                    "updated_at": "2024-08-16T09:36:37.000000Z",
+                                    "options": [
+                                        {
+                                            "id": 151,
+                                            "name": "Duvet Size",
+                                            "values": [
+                                                {
+                                                    "id": 472,
+                                                    "value": "140x220"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "images": [],
+                                    "available_source_types": [
+                                        "duvet",
+                                        "pillow",
+                                        "pillow-back"
+                                    ],
+                                    "required_source_types": [
+                                        "duvet",
+                                        "pillow"
+                                    ]
+                                },
+                                {
+                                    "id": 32325,
+                                    "name": "Duvet Cover",
+                                    "subtitle": "200x200",
+                                    "description": null,
+                                    "SKU": "COT864313",
+                                    "created_at": "2024-08-06T11:23:44.000000Z",
+                                    "updated_at": "2024-08-16T09:37:11.000000Z",
+                                    "options": [
+                                        {
+                                            "id": 151,
+                                            "name": "Duvet Size",
+                                            "values": [
+                                                {
+                                                    "id": 473,
+                                                    "value": "200x200"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "images": [],
+                                    "available_source_types": [
+                                        "duvet",
+                                        "pillow",
+                                        "pillow-back"
+                                    ]
+                                },
+                                {
+                                    "id": 32326,
+                                    "name": "Duvet Cover",
+                                    "subtitle": "200x220",
+                                    "description": null,
+                                    "SKU": "COT864314",
+                                    "created_at": "2024-08-06T11:23:44.000000Z",
+                                    "updated_at": "2024-08-16T09:37:11.000000Z",
+                                    "options": [
+                                        {
+                                            "id": 151,
+                                            "name": "Duvet Size",
+                                            "values": [
+                                                {
+                                                    "id": 474,
+                                                    "value": "200x220"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "images": [],
+                                    "available_source_types": [
+                                        "duvet",
+                                        "pillow",
+                                        "pillow-back"
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "VariantResponse": {
+                "properties": {
+                    "data": {
+                        "example": {
+                            "id": 32323,
+                            "name": "Duvet Cover",
+                            "subtitle": "140x200",
+                            "description": null,
+                            "SKU": "COT864311",
+                            "created_at": "2024-08-06T11:23:44.000000Z",
+                            "updated_at": "2024-08-16T09:36:37.000000Z",
+                            "width": null,
+                            "height": null,
+                            "length": "20.00",
+                            "weight": "30.00",
+                            "options": [
+                                {
+                                    "id": 151,
+                                    "name": "Duvet Size",
+                                    "values": [
+                                        {
+                                            "id": 471,
+                                            "value": "140x200"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "images": [],
+                            "product": {
+                                "id": 1305,
+                                "name": "Duvet Cover",
+                                "subtitle": "Duvet Cover with a pillow",
+                                "description": "<p>Duvet Cover with a pillow</p>",
+                                "description2": "<p></p>",
+                                "slug": "duvet-cover",
+                                "created_at": "2024-08-16T09:32:07.000000Z",
+                                "updated_at": "2024-08-16T09:38:50.000000Z"
+                            },
+                            "available_source_types": [
+                                "duvet",
+                                "pillow",
+                                "pillow-back"
+                            ],
+                            "required_source_types": [
+                                "duvet",
+                                "pillow"
+                            ]
+                        }
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "ApplicationAccessToken": {
+                "type": "http",
+                "name": "ApplicationAccessToken",
+                "in": "header",
+                "scheme": "bearer"
+            },
+            "ApplicationKey": {
+                "type": "apiKey",
+                "name": "X-Application-Key",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Orders",
+            "description": "Create orders and manage order status"
+        },
+        {
+            "name": "Products",
+            "description": "Retrieve product details and work with product catalog"
+        },
+        {
+            "name": "Catalog",
+            "description": "Public product catalog data"
+        },
+        {
+            "name": "Default",
+            "description": "Default"
+        }
+    ]
+}
